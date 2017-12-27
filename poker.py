@@ -69,7 +69,7 @@ def hand_rank(hand):
         return (3, kind(3, ranks), ranks)
     elif two_pair(ranks):                          # 2 pair
         return (2, two_pair(ranks), ranks)
-    elif kind(2, ranks):                           # kind
+    elif kind(2, ranks):                           # pair
         return (1, kind(2, ranks), ranks)
     else:                                          # high card
         return (0, ranks)
@@ -125,32 +125,32 @@ def test():
     assert straight([9, 8, 7, 6, 5]) == True
     assert straight([9, 8, 8, 6, 5]) == False
     assert straight(card_ranks(al)) == True 
-    print "function 'straight' passes"
+    print("function 'straight' passes")
 
     assert flush(sf) == True
     assert flush(fk) == False
-    print "function 'flush' passes"
+    print("function 'flush' passes")
     
     assert card_ranks(sf) == [10, 9, 8, 7, 6]
     assert card_ranks(fk) == [9, 9, 9, 9, 7]
     assert card_ranks(fh) == [10, 10, 10, 7, 7]
     assert card_ranks(['AC', '3D', '4S', 'KH']) == [14, 13, 4, 3]
-    print "function 'card_ranks' passes"
+    print("function 'card_ranks' passes")
     
     assert kind(4, fkranks) == 9
     assert kind(3, fkranks) == None
     assert kind(2, fkranks) == None
     assert kind(1, fkranks) == 7
-    print "function 'kind' passes"
+    print("function 'kind' passes")
     
     assert two_pair(fkranks) == None
     assert two_pair(tpranks) == (9, 5)
-    print "function 'two_pair' passes"
+    print("function 'two_pair' passes")
     
     assert hand_rank(sf) == (8, 10)
     assert hand_rank(fk) == (7, 9, 7)
     assert hand_rank(fh) == (6, 10, 7)
-    print "function 'hand_rank' passes"
+    print("function 'hand_rank' passes")
     
     assert poker([sf, fk, fh]) == [sf]
     assert poker([fk, fh]) == [fk]
@@ -159,7 +159,7 @@ def test():
     assert poker([sf] + 99*[fh]) == [sf]
     assert poker([sf, sf2, fk, fh]) == [sf, sf2]
     assert poker([sf2, fk, fh]) == [sf2]
-    print "function 'poker' passes"    
+    print("function 'poker' passes")    
     
     return "all tests pass"
   
@@ -171,8 +171,8 @@ def hand_percentages(n=700*1000):
             ranking = hand_rank(hand)[0]
             counts[ranking] += 1
     for i in reversed(range(9)):
-        print "%14s: %6.3f %%" % (i, 100.*counts[i]/n)
-    print "Done in", time.time() - start
+        print("%14s: %6.3f %%") % (i, 100.*counts[i]/n)
+    print("Done in", time.time() - start)
     
 #print test()
 #print deal(2)
