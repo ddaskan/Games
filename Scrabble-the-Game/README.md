@@ -7,4 +7,4 @@ Basic Python implementation of Scrabble
 - test_scrabble.py has the unit tests of helper functions
 
 ## Source
-- [MITx: 6.00.1x](https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-11p)  
+- [MITx: 6.00.1x](https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-11)  
