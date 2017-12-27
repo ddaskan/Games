@@ -164,6 +164,7 @@ def test():
     return "all tests pass"
   
 def hand_percentages(n=700*1000):
+    "Function to be sure hand distribution is right"
     start = time.time()
     counts = [0]*9
     for i in range(n/10):
@@ -174,7 +175,51 @@ def hand_percentages(n=700*1000):
         print("%14s: %6.3f %%") % (i, 100.*counts[i]/n)
     print("Done in", time.time() - start)
     
-#print test()
-#print deal(2)
-#hand_percentages(10000)
+def get_input(input_str, valids, invalid_str):
+    while True:
+        out = input(input_str)
+        if out not in valids:
+            print(invalid_str)
+        else:
+            break
+    return out
+    
+def play_poker(debug=False):
+    not_valid = "Please enter a valid input"
+    replay = 'y'
+    
+    while replay == 'y':
+         
+        n_players = get_input("How many players 2-6: ", list(map(str, range(2,7))), not_valid)
+        n_players = int(n_players)
+        hands = deal(n_players)
+        
+        if debug:
+            print(hands)
+            for h in hands:
+                print(hand_rank(h))
+        
+        yourhand = hands[0]
+        print("Your hand:", yourhand)
+        action = get_input("Action (in/pass): ", ['in', 'pass'], not_valid)
+        winner = poker(hands)
+        
+        if debug:
+            print(winner)
+        
+        if yourhand in winner and action == 'in':
+            print("Good choice, you won!")
+        elif yourhand in winner and action == 'pass':
+            print("Bad choice, you could have won!")
+        elif yourhand not in winner and action == 'pass':
+            print("Good choice, you could have lost!")
+        elif yourhand not in winner and action == 'in':
+            print("Bad choice, you lost!")
+        
+        replay = get_input("Replay (y/n): ", ['y', 'n'], not_valid)
 
+    print("Good bye!")
+               
+if __name__ == "__main__":       
+    play_poker()
+        
